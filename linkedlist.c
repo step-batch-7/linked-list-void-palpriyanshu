@@ -67,6 +67,17 @@ Status add_to_list(List_ptr list, Element element){
   return insert_at(list, element, list->length);
 };
 
+Status add_unique(List_ptr list, Element element, Matcher matcher){
+  Node_ptr p_walk = list->first;
+  while(p_walk != NULL){
+    if((*matcher)(p_walk->element, element)){
+      return Failure;
+    }
+    p_walk = p_walk->next;
+  } 
+  return add_to_list(list, element);
+};
+
 void display_int(Element element){
   printf("%d ", *(Int_ptr)element);
 };

@@ -13,6 +13,7 @@ void runTests(void){
   test_insert_at();
   test_add_to_start();
   test_add_to_list();
+  test_add_unique();
   test_clear_list();
 }
 

@@ -3,6 +3,12 @@
 #include "../linkedlist.h"
 #include "tests.h"
 
+Status match_num(Element element1, Element element2);
+
+Status match_num(Element element1, Element element2){
+  return *(Int_ptr)element1 == *(Int_ptr)(element2);
+};
+
 void test_insert_at(void){
   describe("# INSERT_AT");
   List_ptr list = create_list();
@@ -86,5 +92,31 @@ void test_add_to_list(void){
   assert_void_int_equal(list->first->element, element1);
   assert_void_char_equal(list->last->element, element2);
 
+  destroy_list(list);
+};
+
+void test_add_unique(void){
+  describe("# ADD_UNIQUE");
+  List_ptr list = create_list();
+  it("* should add number at first position in the empty list");
+  int_ptr element1 = create_int_element(6);
+  assert_int_equal(add_unique(list, element1, match_num), Success);
+  assert_int_equal(list->length, 1);
+  assert_void_int_equal(list->first->element, element1);
+  assert_void_int_equal(list->last->element, element1);
+
+  it("* should add number at last in the list if it does not exist already");
+  int_ptr element2 = create_int_element(7);
+  assert_int_equal(add_unique(list, element2, match_num), Success);
+  assert_int_equal(list->length, 2);
+  assert_void_int_equal(list->first->element, element1);
+  assert_void_int_equal(list->last->element, element2);
+
+  it("* should not add number in the list if it exist already");
+  assert_int_equal(add_unique(list, element1, match_num), Failure);
+  assert_int_equal(list->length, 2);
+  assert_void_int_equal(list->first->element, element1);
+  assert_void_int_equal(list->last->element, element2);
+  
   destroy_list(list);
 };
