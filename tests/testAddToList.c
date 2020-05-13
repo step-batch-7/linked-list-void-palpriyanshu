@@ -3,7 +3,6 @@
 #include "../linkedlist.h"
 #include "tests.h"
 
-
 void test_insert_at(void){
   describe("# INSERT_AT");
   List_ptr list = create_list();
@@ -47,5 +46,25 @@ void test_insert_at(void){
   assert_void_int_equal(list->first->element, element3);
   assert_void_int_equal(list->last->element, element2);
 
+  clear_list(list);
+};
+
+void test_add_to_start(void){
+  describe("# ADD_TO_START");
+  List_ptr list = create_list();
+  it("* should add a number to empty list");
+  int_ptr element1 = create_int_element(5);
+  assert_int_equal(add_to_start(list, element1), Success);
+  assert_int_equal(list->length, 1);
+  assert_void_int_equal(list->first->element, element1);
+  assert_void_int_equal(list->last->element, element1);
+
+  it("* should add a number to the beginning of list");
+  Char_ptr element2 = create_char_element('a');
+  assert_int_equal(add_to_start(list, element2), Success);
+  assert_int_equal(list->length, 2);
+  assert_void_char_equal(list->first->element, element2);
+  assert_void_int_equal(list->last->element, element1);
+  
   clear_list(list);
 };

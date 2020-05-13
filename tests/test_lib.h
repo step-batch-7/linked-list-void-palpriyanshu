@@ -4,8 +4,10 @@
 typedef char *String;
 typedef void *Void_ptr;
 typedef int * int_ptr;
+typedef char *Char_ptr;
 
 void assert_void_int_equal(Void_ptr actual, Void_ptr expected);
+void assert_void_char_equal(Void_ptr actual, Void_ptr expected);
 void assert_int_equal(int actual, int expected);
 void assert_char_equal(char actual, char expected);
 void assert_null(Void_ptr value);

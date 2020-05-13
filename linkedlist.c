@@ -59,6 +59,10 @@ Status insert_at(List_ptr list, Element element, int position) {
   return Success;
 };
 
+Status add_to_start(List_ptr list, Element element){
+  return insert_at(list, element, 0);
+}
+
 Status clear_list(List_ptr list) {
   Node_ptr p_walk = list->first;
   Node_ptr node = NULL;

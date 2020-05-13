@@ -5,6 +5,10 @@ void assert_void_int_equal(Void_ptr actual, Void_ptr expected){
   printf("%s", *(int_ptr)actual == *(int_ptr)expected ? " ✅" : " ❌");
 };
 
+void assert_void_char_equal(Void_ptr actual, Void_ptr expected){
+  printf("%s", *(Char_ptr)actual == *(Char_ptr)expected ? " ✅" : " ❌");
+};
+
 void assert_int_equal(int actual, int expected){
   printf("%s", actual == expected ? " ✅" : " ❌");
 };

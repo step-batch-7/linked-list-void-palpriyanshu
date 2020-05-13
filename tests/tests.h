@@ -7,5 +7,6 @@ void test_create_char_element(void);
 void test_create_list(void);
 void test_insert_at(void);
 void test_clear_list(void);
+void test_add_to_start(void);
 
 #endif
