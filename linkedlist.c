@@ -63,6 +63,10 @@ Status add_to_start(List_ptr list, Element element){
   return insert_at(list, element, 0);
 }
 
+Status add_to_list(List_ptr list, Element element){
+  return insert_at(list, element, list->length);
+};
+
 void display_int(Element element){
   printf("%d ", *(Int_ptr)element);
 };

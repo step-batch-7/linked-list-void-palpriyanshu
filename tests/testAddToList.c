@@ -68,3 +68,23 @@ void test_add_to_start(void){
   
   destroy_list(list);
 };
+
+void test_add_to_list(void){
+  describe("# ADD_TO_LIST");
+  List_ptr list = create_list();
+  it("* should add a number to empty list");
+  int_ptr element1 = create_int_element(6);
+  assert_int_equal(add_to_list(list, element1), Success);
+  assert_int_equal(list->length, 1);
+  assert_void_int_equal(list->first->element, element1);
+  assert_void_int_equal(list->last->element, element1);
+
+  it("* should add a number to the end of list");
+  Char_ptr element2 = create_char_element('a');
+  assert_int_equal(add_to_list(list, element2), Success);
+  assert_int_equal(list->length, 2);
+  assert_void_int_equal(list->first->element, element1);
+  assert_void_char_equal(list->last->element, element2);
+
+  destroy_list(list);
+};
