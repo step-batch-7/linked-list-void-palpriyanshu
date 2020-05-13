@@ -162,6 +162,14 @@ void test_remove_all_occurrences(){
   assert_null(new_list1->last);
   destroy_list(new_list1);
 
+  it("* should remove all occurrence of a number from single list");
+  add_to_start(list, element1);
+  List_ptr new_list = remove_all_occurrences(list, element1, match_num);
+  assert_int_equal(new_list->length, 1);
+  assert_void_int_equal(new_list->first->element, element1);
+  assert_void_int_equal(new_list->last->element, element1);
+  destroy_list(new_list);
+
   add_to_start(list, element1);
   add_to_list(list, element2);
   add_to_list(list, element1);
@@ -176,7 +184,7 @@ void test_remove_all_occurrences(){
 
   it("* should remove all occurrence of a number from start of list if it exist multiple times");
   List_ptr new_list3 = remove_all_occurrences(list, element1, match_num);
-  assert_int_equal(new_list3->length, 1);
+  assert_int_equal(new_list3->length, 2);
   assert_void_int_equal(new_list3->first->element, element1);
   assert_void_int_equal(new_list3->last->element, element1);
   destroy_list(new_list3);

@@ -176,10 +176,10 @@ List_ptr remove_all_occurrences(List_ptr list, Element element, Matcher matcher)
   while (p_walk != NULL)
   {
     Element removed_element = remove_first_occurrence(list, element, matcher);
+    p_walk = p_walk->next;
     if(removed_element){
       add_to_list(new_list, element);
     }
-    p_walk = p_walk->next;
   }
   return new_list;
 };
