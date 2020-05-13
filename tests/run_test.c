@@ -21,6 +21,7 @@ void runTests(void){
   test_clear_list();
   test_map();
   test_filter();
+  test_reduce();
 }
 
 int main() {

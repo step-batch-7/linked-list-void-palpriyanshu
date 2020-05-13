@@ -7,6 +7,7 @@ Element increment(Element num);
 Element to_lower_case(Element letter);
 Status is_odd(Element num);
 Status is_vowel(Element letter);
+Element sum(Element num1, Element num2);
 
 Element increment(Element num){
   int_ptr incremented = malloc(sizeof(int));
@@ -32,6 +33,11 @@ Status is_vowel(Element letter){
   return lower_case_vowels || upper_case_vowels;
 }; 
 
+Element sum(Element num1, Element num2){
+  int_ptr sum = malloc(sizeof(int));
+  *sum = *(int_ptr)num1 + *(int_ptr)num2;
+  return sum;
+};
 
 void test_for_increment_numbers(void){
   it("* should increment each number by 1");
@@ -146,3 +152,37 @@ void test_filter(){
   test_for_is_vowel();
   test_for_no_true();
 };
+
+
+void test_for_empty_array(void){
+  it("* should return pointer to initial value for empty array");
+  List_ptr list = create_list();
+  Element init = create_int_element(0);
+  Element element = reduce(list, init, sum); 
+  assert_void_int_equal(element, init);
+  destroy_list(list);
+}
+
+void test_for_reducing_int_array(void){
+  it("* should return pointer to sum of numbers");
+  List_ptr list = create_list();
+  Element num1 = create_int_element(1);
+  Element num2 = create_int_element(2);
+  Element num3 = create_int_element(3);
+  Element num4 = create_int_element(4);
+  add_to_list(list, num1);
+  add_to_list(list, num2);
+  add_to_list(list, num3);
+  add_to_list(list, num4);
+  
+  Element init = create_int_element(0);
+  Element element = reduce(list, init, sum); 
+  assert_int_equal(*(Int_ptr)element, 10);
+  destroy_list(list);
+}
+
+void test_reduce(void){
+  describe("# REDUCE");
+  test_for_empty_array();
+  test_for_reducing_int_array();
+}

@@ -191,6 +191,17 @@ List_ptr filter(List_ptr list, Predicate predicate){
   return filtered_list;
 };
 
+Element reduce(List_ptr list, Element init, Reducer reducer){
+  Element element = init;
+  Node_ptr p_walk = list->first;
+  for (int index = 0; index < list->length; index++)
+  {
+    element = (*reducer)(element, p_walk->element);
+    p_walk = p_walk->next;
+  }
+  return element;
+};
+
 void display_int(Element element){
   printf("%d ", *(Int_ptr)element);
 };
