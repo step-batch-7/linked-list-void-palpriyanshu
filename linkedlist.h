@@ -42,6 +42,7 @@ typedef Status (*Predicate)(Element);
 typedef Element (*Reducer)(Element, Element);
 typedef void (*ElementProcessor)(Element);
 typedef Status (*Matcher)(Element, Element);
+typedef void (*Displayer)(Element);
 
 List_ptr create_list(void);
 Int_ptr create_int_element(int value);
@@ -68,5 +69,10 @@ List_ptr remove_all_occurrences(List_ptr, Element element, Matcher matcher); // 
 
 Status add_unique(List_ptr list, Element element, Matcher matcher);
 
+void display_int(Element element);
+void display_char(Element element);
+void display(List_ptr list, Displayer displayer);
+
 Status clear_list(List_ptr);
+void destroy_list(List_ptr list);
 #endif

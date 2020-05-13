@@ -63,6 +63,22 @@ Status add_to_start(List_ptr list, Element element){
   return insert_at(list, element, 0);
 }
 
+void display_int(Element element){
+  printf("%d ", *(Int_ptr)element);
+};
+
+void display_char(Element element){
+  printf("%d ", *(Char_ptr)element);
+};
+
+void display(List_ptr list, Displayer displayer){
+  Node_ptr p_walk = list->first;
+  while (p_walk != NULL ) {
+    (*displayer)(p_walk->element);
+    p_walk = p_walk->next;
+  }
+}
+
 Status clear_list(List_ptr list) {
   Node_ptr p_walk = list->first;
   Node_ptr node = NULL;
@@ -78,4 +94,8 @@ Status clear_list(List_ptr list) {
   return Success;
 };
 
-
+void destroy_list(List_ptr list) {
+  Status status = clear_list(list);
+  free(list);
+  list = NULL;
+};

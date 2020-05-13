@@ -46,7 +46,7 @@ void test_insert_at(void){
   assert_void_int_equal(list->first->element, element3);
   assert_void_int_equal(list->last->element, element2);
 
-  clear_list(list);
+  destroy_list(list);
 };
 
 void test_add_to_start(void){
@@ -66,5 +66,5 @@ void test_add_to_start(void){
   assert_void_char_equal(list->first->element, element2);
   assert_void_int_equal(list->last->element, element1);
   
-  clear_list(list);
+  destroy_list(list);
 };

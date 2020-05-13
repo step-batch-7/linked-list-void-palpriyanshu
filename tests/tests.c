@@ -10,7 +10,7 @@ void test_create_list(void){
   assert_null(list->first);
   assert_null(list->last);
   assert_int_equal(list->length, 0);
-  clear_list(list);
+  destroy_list(list);
 };
 
 void test_create_char_element(void){
@@ -51,5 +51,6 @@ void test_clear_list(){
  assert_null(list->first);
  assert_null(list->last);
  assert_int_equal(list->length, 0);
+ destroy_list(list);
 };
 
