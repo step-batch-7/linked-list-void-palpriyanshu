@@ -7,6 +7,7 @@ void runTests(void);
 
 void runTests(void){
   test_create_list();
+  test_create_node();
 }
 
 int main() {
