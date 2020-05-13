@@ -8,6 +8,7 @@ Element to_lower_case(Element letter);
 Status is_odd(Element num);
 Status is_vowel(Element letter);
 Element sum(Element num1, Element num2);
+void make_twice(Element element);
 
 Element increment(Element num){
   int_ptr incremented = malloc(sizeof(int));
@@ -37,6 +38,10 @@ Element sum(Element num1, Element num2){
   int_ptr sum = malloc(sizeof(int));
   *sum = *(int_ptr)num1 + *(int_ptr)num2;
   return sum;
+};
+
+void make_twice(Element element){
+  *(Int_ptr)element =  *(Int_ptr)element * 2;
 };
 
 void test_for_increment_numbers(void){
@@ -237,4 +242,47 @@ void test_reverse(void){
   test_for_empty_list();
   test_for_single_list();
   test_for_num_list();
+}
+
+void test_for_list_with_no_element(void){
+  it("* should iterate empty list");
+    List_ptr list = create_list();
+    forEach(list, make_twice);
+    assert_int_equal(list->length, 0);
+    assert_null(list->first);
+    assert_null(list->last);
+    destroy_list(list);
+}
+
+void test_for_list_with_one_element(void){
+  it("* should iterate single list");
+    List_ptr list = create_list();
+    Element element = create_int_element(4);
+    add_to_list(list, element);
+    forEach(list, make_twice);
+    assert_int_equal(list->length, 1);
+    assert_int_equal(*(Int_ptr)list->first->element, 8);
+    assert_int_equal(*(Int_ptr)list->last->element, 8);
+    destroy_list(list);
+}
+
+void test_for_list_with_many_elements(void){
+  it("* should iterate list with more than one element");
+    List_ptr list = create_list();
+    Element element1 = create_int_element(4);
+    Element element2 = create_int_element(5);
+    add_to_list(list, element1);
+    add_to_list(list, element2);
+    forEach(list, make_twice);
+    assert_int_equal(list->length, 2);
+    assert_int_equal(*(Int_ptr)list->first->element, 8);
+    assert_int_equal(*(Int_ptr)list->last->element, 10);
+    destroy_list(list);
+}
+
+void test_for_each(void){
+  describe("# FOR_EACH");
+  test_for_list_with_no_element();
+  test_for_list_with_one_element();
+  test_for_list_with_many_elements();
 }

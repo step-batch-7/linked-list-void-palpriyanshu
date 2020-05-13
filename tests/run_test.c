@@ -24,6 +24,7 @@ void runTests(void){
   test_filter();
   test_reduce();
   test_reverse();
+  test_for_each();
 }
 
 int main() {
