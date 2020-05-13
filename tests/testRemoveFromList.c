@@ -96,3 +96,38 @@ void test_remove_at(){
 
   destroy_list(list);
 };
+
+void test_remove_first_occurrence(){
+  List_ptr list = create_list();
+  describe("# REMOVE_FIRST_OCCURRENCE");
+  int_ptr element1 = create_int_element(1);
+  int_ptr element2 = create_int_element(2);
+
+  it("* should not remove a number from empty list");
+  assert_null(remove_first_occurrence(list, element1, match_num));
+  assert_int_equal(list->length, 0);
+
+  add_to_start(list, element1);
+  add_to_list(list, element2);
+  add_to_list(list, element1);
+
+  it("* should remove first occurrence of a number from start of list if it exist multiple times");
+  assert_void_int_equal(remove_first_occurrence(list, element1, match_num), element1);
+  assert_int_equal(list->length, 2);
+  assert_void_int_equal(list->first->element, element2);
+  assert_void_int_equal(list->last->element, element1);
+
+  it("* should remove first occurrence of a number from start of list if it exist once");
+  assert_void_int_equal(remove_first_occurrence(list, element1, match_num), element1);
+  assert_int_equal(list->length, 1);
+  assert_void_int_equal(list->first->element, element2);
+  assert_void_int_equal(list->last->element, element2);
+
+  it("* should not remove a number from the list if it does not exist");
+  assert_null(remove_first_occurrence(list, element1, match_num));
+  assert_int_equal(list->length, 1);
+  assert_void_int_equal(list->first->element, element2);
+  assert_void_int_equal(list->last->element, element2);
+
+  destroy_list(list);
+};
