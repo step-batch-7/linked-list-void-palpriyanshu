@@ -21,6 +21,12 @@ void test_remove_from_start(){
   assert_void_int_equal(list->first->element, element2);
   assert_void_int_equal(list->last->element, element2);
 
+  it("* should remove a number from single list");
+  assert_void_int_equal(remove_from_start(list), element2);
+  assert_int_equal(list->length, 0);
+  assert_null(list->first);
+  assert_null(list->last);
+
   destroy_list(list);
 }
 
