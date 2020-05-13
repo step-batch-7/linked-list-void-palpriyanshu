@@ -17,6 +17,7 @@ typedef enum
 } Status;
 
 typedef void *Element;
+typedef int *Int_ptr;
 
 typedef struct node
 {
@@ -42,6 +43,7 @@ typedef void (*ElementProcessor)(Element);
 typedef Status (*Matcher)(Element, Element);
 
 List_ptr create_list(void);
+Int_ptr create_int_data(int value);
 
 Status add_to_list(List_ptr, Element);
 Status add_to_start(List_ptr, Element);
