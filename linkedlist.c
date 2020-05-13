@@ -177,6 +177,20 @@ List_ptr map(List_ptr list, Mapper mapper){
   return mapped_list;
 };
 
+List_ptr filter(List_ptr list, Predicate predicate){
+  List_ptr filtered_list = create_list();
+  Node_ptr p_walk = list->first;
+  for (int index = 0; index < list->length; index++)
+  {
+    Status isSuccess =  (*predicate)(p_walk->element);
+    if(isSuccess){
+      add_to_list(filtered_list, p_walk->element);
+    }
+    p_walk = p_walk->next;
+  }
+  return filtered_list;
+};
+
 void display_int(Element element){
   printf("%d ", *(Int_ptr)element);
 };

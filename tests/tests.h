@@ -16,5 +16,6 @@ void test_remove_first_occurrence(void);
 void test_clear_list(void);
 
 void test_map(void);
+void test_filter(void);
 
 #endif
