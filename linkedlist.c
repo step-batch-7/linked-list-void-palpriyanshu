@@ -86,6 +86,10 @@ Element remove_from_start(List_ptr list){
   if(list->length == 0){
     return NULL;
   }
+  if(list->length == 1){
+    list->last = NULL;
+  }
+  
   Node_ptr p_walk = list->first;
   Element element = p_walk->element;
   list->first = p_walk->next;
