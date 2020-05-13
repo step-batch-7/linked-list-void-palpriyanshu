@@ -11,6 +11,7 @@ void runTests(void){
   test_create_char_element();
   test_create_node();
   test_insert_at();
+  test_clear_list();
 }
 
 int main() {

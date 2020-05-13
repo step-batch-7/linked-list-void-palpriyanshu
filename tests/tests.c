@@ -10,6 +10,7 @@ void test_create_list(void){
   assert_null(list->first);
   assert_null(list->last);
   assert_int_equal(list->length, 0);
+  clear_list(list);
 };
 
 void test_create_char_element(void){
@@ -38,3 +39,17 @@ void test_create_node(void){
   assert_null(node->next);
   free(node);
 };
+
+void test_clear_list(){
+ describe("# CLEAR_LIST");
+ it("* should clear the list if exist and make count 0");
+ List_ptr list = create_list();
+ int_ptr element = create_int_element(6);
+ insert_at(list, element, 0);
+ assert_int_equal(list->length, 1);
+ assert_int_equal(clear_list(list), Success);
+ assert_null(list->first);
+ assert_null(list->last);
+ assert_int_equal(list->length, 0);
+};
+

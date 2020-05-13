@@ -46,4 +46,6 @@ void test_insert_at(void){
   assert_int_equal(list->length, 4);
   assert_void_int_equal(list->first->element, element3);
   assert_void_int_equal(list->last->element, element2);
+
+  clear_list(list);
 };

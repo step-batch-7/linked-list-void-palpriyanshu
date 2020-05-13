@@ -59,3 +59,19 @@ Status insert_at(List_ptr list, Element element, int position) {
   return Success;
 };
 
+Status clear_list(List_ptr list) {
+  Node_ptr p_walk = list->first;
+  Node_ptr node = NULL;
+
+  while(p_walk != NULL) {
+    node = p_walk;
+    p_walk = node->next;
+    free(node);
+  }
+  list->first = NULL;
+  list->last = NULL;
+  list->length = 0;
+  return Success;
+};
+
+
