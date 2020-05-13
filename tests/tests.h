@@ -19,5 +19,6 @@ void test_clear_list(void);
 void test_map(void);
 void test_filter(void);
 void test_reduce(void);
+void test_reverse(void);
 
 #endif

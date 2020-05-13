@@ -23,6 +23,7 @@ void runTests(void){
   test_map();
   test_filter();
   test_reduce();
+  test_reverse();
 }
 
 int main() {

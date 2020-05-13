@@ -52,7 +52,7 @@ void test_for_increment_numbers(void){
   add_to_list(list, num4);
   
   List_ptr mapped_list = map(list, increment);
-  assert_int_equal(mapped_list->length, 4);
+  assert_int_equal(mapped_list->length, list->length);
   assert_int_equal(*(Int_ptr)mapped_list->first->element, 6);
   assert_int_equal(*(Int_ptr)mapped_list->last->element, 9);
   destroy_list(mapped_list);
@@ -72,7 +72,7 @@ void test_for_to_lower_case(void){
   add_to_list(list, letter4);
   
   List_ptr mapped_list = map(list, to_lower_case);
-  assert_int_equal(mapped_list->length, 4);
+  assert_int_equal(mapped_list->length, list->length);
   assert_char_equal(*(Char_ptr)mapped_list->first->element, 'a');
   assert_char_equal(*(Char_ptr)mapped_list->last->element, 'k');
   destroy_list(mapped_list);
@@ -185,4 +185,56 @@ void test_reduce(void){
   describe("# REDUCE");
   test_for_empty_array();
   test_for_reducing_int_array();
+}
+
+void test_for_empty_list(void){
+  it("* should return empty list for given empty list");
+  List_ptr list = create_list();
+  List_ptr reversed_list = reverse(list);
+  assert_int_equal(reversed_list->length, list->length);
+  assert_null(reversed_list->first);
+  assert_null(reversed_list->last);
+  destroy_list(reversed_list);
+  destroy_list(list);
+}
+
+void test_for_num_list(void){
+  it("* should reverse the given list");
+  List_ptr list = create_list();
+  Element num1 = create_int_element(1);
+  Element num2 = create_int_element(2);
+  Element num3 = create_int_element(3);
+  Element num4 = create_int_element(4);
+  add_to_list(list, num1);
+  add_to_list(list, num2);
+  add_to_list(list, num3);
+  add_to_list(list, num4);
+
+  List_ptr reversed_list = reverse(list);
+  assert_int_equal(reversed_list->length, list->length);
+  assert_void_int_equal(reversed_list->first->element, list->last->element);
+  assert_void_int_equal(reversed_list->last->element, list->first->element);
+  destroy_list(reversed_list);
+  destroy_list(list);
+}
+
+void test_for_single_list(void){
+  it("* should reverse the single list");
+  List_ptr list = create_list();
+  Element num1 = create_int_element(1);
+  add_to_list(list, num1);
+
+  List_ptr reversed_list = reverse(list);
+  assert_int_equal(reversed_list->length, list->length);
+  assert_void_int_equal(reversed_list->first->element, list->first->element);
+  assert_void_int_equal(reversed_list->last->element, list->last->element);
+  destroy_list(reversed_list);
+  destroy_list(list);
+}
+
+void test_reverse(void){
+  describe("# REVERSE");
+  test_for_empty_list();
+  test_for_single_list();
+  test_for_num_list();
 }

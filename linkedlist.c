@@ -220,6 +220,16 @@ Element reduce(List_ptr list, Element init, Reducer reducer){
   return element;
 };
 
+List_ptr reverse(List_ptr list){
+  List_ptr reversed_list = create_list();
+  Node_ptr p_walk = list->first;
+  while(p_walk != NULL){
+    add_to_start(reversed_list, p_walk->element);
+    p_walk = p_walk->next;
+  }
+  return reversed_list;
+};
+
 void display_int(Element element){
   printf("%d ", *(Int_ptr)element);
 };
