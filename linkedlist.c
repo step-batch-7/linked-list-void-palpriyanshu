@@ -164,7 +164,18 @@ Element remove_first_occurrence(List_ptr list, Element element, Matcher matcher)
     current = current->next;
   }
   return NULL;
-}
+};
+
+List_ptr map(List_ptr list, Mapper mapper){
+  List_ptr mapped_list = create_list();
+  Node_ptr p_walk = list->first;
+  for (int index = 0; index < list->length; index++)
+  {
+    add_to_list(mapped_list, (*mapper)(p_walk->element));
+    p_walk = p_walk->next;
+  }
+  return mapped_list;
+};
 
 void display_int(Element element){
   printf("%d ", *(Int_ptr)element);

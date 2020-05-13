@@ -15,4 +15,6 @@ void test_remove_at(void);
 void test_remove_first_occurrence(void);
 void test_clear_list(void);
 
+void test_map(void);
+
 #endif
