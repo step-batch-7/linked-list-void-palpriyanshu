@@ -9,6 +9,10 @@ void assert_int_equal(int actual, int expected){
   printf("%s", actual == expected ? " ✅" : " ❌");
 };
 
+void assert_char_equal(char actual, char expected){
+  printf("%s", actual == expected ? " ✅" : " ❌");
+};
+
 void assert_null(Void_ptr expected){
   printf("%s", expected == NULL ? " ✅" : " ❌");
 };

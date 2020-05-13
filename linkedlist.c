@@ -2,10 +2,16 @@
 #include <stdlib.h>
 #include "linkedlist.h"
 
-Int_ptr create_int_data(int value){
-  Int_ptr data = malloc(sizeof(int));
-  *data = value;
-  return data;
+Int_ptr create_int_element(int value){
+  Int_ptr element = malloc(sizeof(int));
+  *element = value;
+  return element;
+};
+
+Char_ptr create_char_element(char value){
+  Char_ptr element = malloc(sizeof(char));
+  *element = value;
+  return element;
 };
 
 List_ptr create_list(void){

@@ -18,6 +18,7 @@ typedef enum
 
 typedef void *Element;
 typedef int *Int_ptr;
+typedef char *Char_ptr;
 
 typedef struct node
 {
@@ -43,7 +44,8 @@ typedef void (*ElementProcessor)(Element);
 typedef Status (*Matcher)(Element, Element);
 
 List_ptr create_list(void);
-Int_ptr create_int_data(int value);
+Int_ptr create_int_element(int value);
+Char_ptr create_char_element(char value);
 Node_ptr create_node(Element element);
 
 Status add_to_list(List_ptr, Element);
