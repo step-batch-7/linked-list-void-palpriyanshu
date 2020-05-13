@@ -10,6 +10,7 @@ void runTests(void){
   test_create_int_element();
   test_create_char_element();
   test_create_node();
+  test_insert_at();
 }
 
 int main() {

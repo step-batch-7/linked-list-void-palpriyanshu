@@ -29,3 +29,33 @@ Node_ptr create_node(Element element){
   return new_node;
 };
 
+Status insert_at(List_ptr list, Element element, int position) {
+  if(position < 0 || position > list->length){
+    return Failure;
+  }
+  Node_ptr node = create_node(element);
+
+  if(position == list->length || list->length == 0){
+    list->last = node;
+  }
+  if(position == 0){
+    node->next = list->first;
+    list->first = node;
+    list->length++;
+    return Success;
+  }
+  
+  Node_ptr p_walk = list->first;
+  int index = 1;
+  while (index != position)
+  {
+    p_walk = p_walk->next;
+    index++;
+  }
+  node->next = p_walk->next;
+  p_walk->next = node;
+  list->last->next = NULL;
+  list->length++;
+  return Success;
+};
+
