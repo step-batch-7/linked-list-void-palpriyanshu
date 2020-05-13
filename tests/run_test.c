@@ -16,6 +16,7 @@ void runTests(void){
   test_add_unique();
   test_remove_from_start();
   test_remove_from_end();
+  test_remove_at();
   test_clear_list();
 }
 
