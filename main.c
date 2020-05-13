@@ -9,6 +9,7 @@ int main()
   insert_at(list, num1, 0);
   add_to_start(list, num2);
   add_to_list(list, num2);
+  add_unique(list, num2, match_num);
   display(list, display_int);
   destroy_list(list);
   return 0;

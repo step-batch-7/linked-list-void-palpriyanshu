@@ -3,12 +3,6 @@
 #include "../linkedlist.h"
 #include "tests.h"
 
-Status match_num(Element element1, Element element2);
-
-Status match_num(Element element1, Element element2){
-  return *(Int_ptr)element1 == *(Int_ptr)(element2);
-};
-
 void test_insert_at(void){
   describe("# INSERT_AT");
   List_ptr list = create_list();

@@ -67,6 +67,10 @@ Status add_to_list(List_ptr list, Element element){
   return insert_at(list, element, list->length);
 };
 
+Status match_num(Element element1, Element element2){
+  return *(Int_ptr)element1 == *(Int_ptr)(element2);
+};
+
 Status add_unique(List_ptr list, Element element, Matcher matcher){
   Node_ptr p_walk = list->first;
   while(p_walk != NULL){
@@ -76,6 +80,19 @@ Status add_unique(List_ptr list, Element element, Matcher matcher){
     p_walk = p_walk->next;
   } 
   return add_to_list(list, element);
+};
+
+Element remove_from_start(List_ptr list){
+  if(list->length == 0){
+    return NULL;
+  }
+  Node_ptr p_walk = list->first;
+  Element element = p_walk->element;
+  list->first = p_walk->next;
+  list->length--;
+  free(p_walk);
+  p_walk = NULL;
+  return element;
 };
 
 void display_int(Element element){
