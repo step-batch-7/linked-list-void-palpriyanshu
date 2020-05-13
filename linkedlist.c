@@ -95,6 +95,23 @@ Element remove_from_start(List_ptr list){
   return element;
 };
 
+Element remove_from_end(List_ptr list){
+  if(list->length <= 1){
+    return remove_from_start(list);
+  }
+  Node_ptr p_walk = list->first;
+  while(p_walk->next != NULL){
+     list->last = p_walk;
+    p_walk = p_walk->next;
+  }
+  Element element = p_walk->element;
+  list->last->next = NULL;
+  list->length--;
+  free(p_walk);
+  p_walk = NULL;
+  return element;
+};
+
 void display_int(Element element){
   printf("%d ", *(Int_ptr)element);
 };

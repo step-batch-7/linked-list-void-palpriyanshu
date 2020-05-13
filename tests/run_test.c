@@ -14,8 +14,9 @@ void runTests(void){
   test_add_to_start();
   test_add_to_list();
   test_add_unique();
-  test_clear_list();
   test_remove_from_start();
+  test_remove_from_end();
+  test_clear_list();
 }
 
 int main() {
