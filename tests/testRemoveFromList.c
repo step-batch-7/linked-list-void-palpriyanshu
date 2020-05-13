@@ -108,32 +108,85 @@ void test_remove_first_occurrence(){
   describe("# REMOVE_FIRST_OCCURRENCE");
   int_ptr element1 = create_int_element(1);
   int_ptr element2 = create_int_element(2);
+  int_ptr element3 = create_int_element(3);
 
   it("* should not remove a number from empty list");
   assert_null(remove_first_occurrence(list, element1, match_num));
   assert_int_equal(list->length, 0);
 
   add_to_start(list, element1);
+
+  it("* should remove a number from single list");
+  assert_void_int_equal(remove_first_occurrence(list, element1, match_num), element1);
+  assert_int_equal(list->length, 0);
+  assert_null(list->first);
+  assert_null(list->last);
+
+  add_to_start(list, element1);
   add_to_list(list, element2);
   add_to_list(list, element1);
+  add_to_list(list, element3);
+
+  it("* should remove first occurrence of a number from start of list if it exist once");
+  assert_void_int_equal(remove_first_occurrence(list, element2, match_num), element2);
+  assert_int_equal(list->length, 3);
+  assert_void_int_equal(list->first->element, element1);
+  assert_void_int_equal(list->last->element, element3);
 
   it("* should remove first occurrence of a number from start of list if it exist multiple times");
   assert_void_int_equal(remove_first_occurrence(list, element1, match_num), element1);
   assert_int_equal(list->length, 2);
-  assert_void_int_equal(list->first->element, element2);
-  assert_void_int_equal(list->last->element, element1);
-
-  it("* should remove first occurrence of a number from start of list if it exist once");
-  assert_void_int_equal(remove_first_occurrence(list, element1, match_num), element1);
-  assert_int_equal(list->length, 1);
-  assert_void_int_equal(list->first->element, element2);
-  assert_void_int_equal(list->last->element, element2);
+  assert_void_int_equal(list->first->element, element1);
+  assert_void_int_equal(list->last->element, element3);
 
   it("* should not remove a number from the list if it does not exist");
-  assert_null(remove_first_occurrence(list, element1, match_num));
-  assert_int_equal(list->length, 1);
-  assert_void_int_equal(list->first->element, element2);
-  assert_void_int_equal(list->last->element, element2);
+  assert_null(remove_first_occurrence(list, element2, match_num));
+  assert_int_equal(list->length, 2);
+  assert_void_int_equal(list->first->element, element1);
+  assert_void_int_equal(list->last->element, element3);
+
+  destroy_list(list);
+};
+
+void test_remove_all_occurrences(){
+  List_ptr list = create_list();
+  describe("# REMOVE_ALL_OCCURRENCES");
+  int_ptr element1 = create_int_element(1);
+  int_ptr element2 = create_int_element(2);
+  int_ptr element3 = create_int_element(3);
+
+  it("* should not remove a number from empty list");
+  List_ptr new_list1 = remove_all_occurrences(list, element3, match_num);
+  assert_int_equal(new_list1->length, 0);
+  assert_null(new_list1->first);
+  assert_null(new_list1->last);
+  destroy_list(new_list1);
+
+  add_to_start(list, element1);
+  add_to_list(list, element2);
+  add_to_list(list, element1);
+  add_to_list(list, element3);
+
+  it("* should remove all occurrence of a number from start of list if it exist once");
+  List_ptr new_list2 = remove_all_occurrences(list, element3, match_num);
+  assert_int_equal(new_list2->length, 1);
+  assert_void_int_equal(new_list2->first->element, element3);
+  assert_void_int_equal(new_list2->last->element, element3);
+  destroy_list(new_list2);
+
+  it("* should remove all occurrence of a number from start of list if it exist multiple times");
+  List_ptr new_list3 = remove_all_occurrences(list, element1, match_num);
+  assert_int_equal(new_list3->length, 1);
+  assert_void_int_equal(new_list3->first->element, element1);
+  assert_void_int_equal(new_list3->last->element, element1);
+  destroy_list(new_list3);
+
+  it("* should not remove a number from the list if it does not exist");
+  List_ptr new_list4 = remove_all_occurrences(list, element3, match_num);
+  assert_int_equal(new_list4->length, 0);
+  assert_null(new_list4->first);
+  assert_null(new_list4->last);
+  destroy_list(new_list4);
 
   destroy_list(list);
 };

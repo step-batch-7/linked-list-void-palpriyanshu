@@ -158,7 +158,7 @@ Element remove_first_occurrence(List_ptr list, Element element, Matcher matcher)
   Node_ptr current = list->first;
   Node_ptr previous = NULL;
   while(current != NULL){
-    if((*matcher)(current, element)) {
+    if((*matcher)(current->element, element)) {
       previous->next = current->next;
       list->length--;
       free(current);
@@ -168,6 +168,20 @@ Element remove_first_occurrence(List_ptr list, Element element, Matcher matcher)
     current = current->next;
   }
   return NULL;
+};
+
+List_ptr remove_all_occurrences(List_ptr list, Element element, Matcher matcher){
+  List_ptr new_list = create_list();
+  Node_ptr p_walk = list->first;
+  while (p_walk != NULL)
+  {
+    Element removed_element = remove_first_occurrence(list, element, matcher);
+    if(removed_element){
+      add_to_list(new_list, element);
+    }
+    p_walk = p_walk->next;
+  }
+  return new_list;
 };
 
 List_ptr map(List_ptr list, Mapper mapper){
