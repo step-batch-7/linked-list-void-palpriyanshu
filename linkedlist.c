@@ -132,32 +132,18 @@ Element remove_at(List_ptr list, int position)
 };
 
 Element remove_first_occurrence(List_ptr list, Element element, Matcher matcher) {
-  if(list->first == NULL){
-    return NULL;
-  };
-
-  if((*matcher)(list->first->element, element)){
-    return remove_from_start(list);
-  };
-
-  if((*matcher)(list->last->element, element)){
-    return remove_from_end(list);
-  };
-
   Node_ptr current = list->first;
-  Node_ptr prev = list->first;
-  while(current != NULL){
-    if((*matcher)(current->element, element)) {
-      Element removed_element = current->element;
-      prev->next = current->next;
-      list->length--;
-      free(current);
-      return removed_element;
+  Node_ptr prev = NULL;
+  for (int position = 0; current != NULL; position++)
+  {
+    if ((*matcher)(current->element, element))
+    {
+      current = prev;
+      return remove_at(list, position);
     }
     prev = current;
     current = current->next;
   }
-  free(current);
   return NULL;
 };
 
