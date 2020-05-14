@@ -159,10 +159,11 @@ Element remove_first_occurrence(List_ptr list, Element element, Matcher matcher)
   Node_ptr previous = NULL;
   while(current != NULL){
     if((*matcher)(current->element, element)) {
+      Element removed_element = current->element;
       previous->next = current->next;
       list->length--;
       free(current);
-      return element;
+      return removed_element;
     }
     previous = current;
     current = current->next;
