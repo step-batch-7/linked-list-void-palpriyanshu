@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "test_lib.h"
 #include "../linkedlist.h"
+#include "../elements.h"
 #include "tests.h"
 
 void runTests(void);

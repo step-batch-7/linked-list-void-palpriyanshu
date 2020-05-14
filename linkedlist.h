@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "elements.h"
 
 /*
 The consumer of this Linked List library is expected to take care of allocating & freeing elements.
@@ -9,7 +10,6 @@ The Linked List maintains the element references in a sequence and provides conv
 #ifndef __LINKEDLIST_H_
 #define __LINKEDLIST_H_
 
-
 typedef enum
 {
   Failure,
@@ -17,8 +17,6 @@ typedef enum
 } Status;
 
 typedef void *Element;
-typedef int *Int_ptr;
-typedef char *Char_ptr;
 
 typedef struct node
 {
@@ -45,8 +43,6 @@ typedef Status (*Matcher)(Element, Element);
 typedef void (*Displayer)(Element);
 
 List_ptr create_list(void);
-Int_ptr create_int_element(int value);
-Char_ptr create_char_element(char value);
 Node_ptr create_node(Element element);
 
 Status add_to_list(List_ptr, Element);
@@ -64,14 +60,11 @@ Element remove_from_start(List_ptr); // Returns Element which was removed
 Element remove_from_end(List_ptr);
 Element remove_at(List_ptr, int position);
 
+Status match_num(Element num1, Element num2);
 Element remove_first_occurrence(List_ptr, Element element, Matcher matcher);
 List_ptr remove_all_occurrences(List_ptr, Element element, Matcher matcher); // Returns List of removed elements
-
-Status match_num(Element element1, Element element2);
 Status add_unique(List_ptr list, Element element, Matcher matcher);
 
-void display_int(Element element);
-void display_char(Element element);
 void display(List_ptr list, Displayer displayer);
 
 Status clear_list(List_ptr);

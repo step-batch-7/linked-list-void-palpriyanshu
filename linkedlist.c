@@ -1,17 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "linkedlist.h"
+#include "elements.h"
 
-Int_ptr create_int_element(int value){
-  Int_ptr element = malloc(sizeof(int));
-  *element = value;
-  return element;
-};
-
-Char_ptr create_char_element(char value){
-  Char_ptr element = malloc(sizeof(char));
-  *element = value;
-  return element;
+Status match_num(Element num1, Element num2){
+  return *(Int_ptr)num1 == *(Int_ptr)num2;
 };
 
 List_ptr create_list(void){
@@ -65,10 +58,6 @@ Status add_to_start(List_ptr list, Element element){
 
 Status add_to_list(List_ptr list, Element element){
   return insert_at(list, element, list->length);
-};
-
-Status match_num(Element element1, Element element2){
-  return *(Int_ptr)element1 == *(Int_ptr)(element2);
 };
 
 Status add_unique(List_ptr list, Element element, Matcher matcher){
@@ -156,18 +145,19 @@ Element remove_first_occurrence(List_ptr list, Element element, Matcher matcher)
   };
 
   Node_ptr current = list->first;
-  Node_ptr previous = current;
+  Node_ptr prev = list->first;
   while(current != NULL){
     if((*matcher)(current->element, element)) {
       Element removed_element = current->element;
-      previous->next = current->next;
+      prev->next = current->next;
       list->length--;
       free(current);
       return removed_element;
     }
-    previous = current;
+    prev = current;
     current = current->next;
   }
+  free(current);
   return NULL;
 };
 
@@ -235,14 +225,6 @@ void forEach(List_ptr list, ElementProcessor processor){
     (*processor)(p_walk->element);
     p_walk = p_walk->next;
   }
-};
-
-void display_int(Element element){
-  printf("%d ", *(Int_ptr)element);
-};
-
-void display_char(Element element){
-  printf("%d ", *(Char_ptr)element);
 };
 
 void display(List_ptr list, Displayer displayer){
