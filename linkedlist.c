@@ -22,6 +22,13 @@ Node_ptr create_node(Element element){
   return new_node;
 };
 
+Prev_current_pair_ptr create_prev_current_pair(List_ptr list) {
+  Prev_current_pair_ptr pair = malloc(sizeof(Prev_current_pair));
+  pair->prev = NULL;
+  pair->current = list->first;
+  return pair;
+};
+
 Status insert_at(List_ptr list, Element element, int position) {
   if(position < 0 || position > list->length){
     return Failure;
@@ -78,7 +85,6 @@ Element remove_from_start(List_ptr list){
   if(list->length == 1){
     list->last = NULL;
   }
-  
   Node_ptr p_walk = list->first;
   Element element = p_walk->element;
   list->first = p_walk->next;
@@ -110,6 +116,7 @@ Element remove_at(List_ptr list, int position)
   if(position < 0 || position > (list->length - 1)) {
     return NULL;
   }
+  Prev_current_pair_ptr pair = create_prev_current_pair(list);
   if(position == 0) {
     return remove_from_start(list);
   }
@@ -117,32 +124,30 @@ Element remove_at(List_ptr list, int position)
     return remove_from_end(list);
   }
   int index = 1;
-  Node_ptr p_walk = list->first;
   while (index != position) {
-    p_walk = p_walk->next;
+    pair->current = pair->current->next;
     index++;
   }
-  Node_ptr node = p_walk->next;
-  p_walk->next = node->next;
-  Element element = node->element;
+  pair->prev = pair->current->next;
+  pair->current->next = pair->prev->next;
+  Element element = pair->prev->element;
   list->length--;
-  free(node);
-  node = NULL;
+  free(pair->prev);
+  pair->prev = NULL;
   return element;
 };
 
 Element remove_first_occurrence(List_ptr list, Element element, Matcher matcher) {
-  Node_ptr current = list->first;
-  Node_ptr prev = NULL;
-  for (int position = 0; current != NULL; position++)
+  Prev_current_pair_ptr pair = create_prev_current_pair(list);
+  for (int position = 0; pair->current != NULL; position++)
   {
-    if ((*matcher)(current->element, element))
+    if ((*matcher)(pair->current->element, element))
     {
-      current = prev;
+      pair->current = pair->prev;
       return remove_at(list, position);
     }
-    prev = current;
-    current = current->next;
+    pair->prev = pair->current;
+    pair->current = pair->current->next;
   }
   return NULL;
 };

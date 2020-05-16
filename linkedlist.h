@@ -26,6 +26,13 @@ typedef struct node
 
 typedef Node *Node_ptr;
 
+typedef struct{
+  Node_ptr prev;
+  Node_ptr current;
+} Prev_current_pair;
+
+typedef Prev_current_pair *Prev_current_pair_ptr;
+
 typedef struct linklist
 {
   Node *first;
@@ -44,6 +51,7 @@ typedef void (*Displayer)(Element);
 
 List_ptr create_list(void);
 Node_ptr create_node(Element element);
+Prev_current_pair_ptr create_prev_current_pair(List_ptr list);
 
 Status add_to_list(List_ptr, Element);
 Status add_to_start(List_ptr, Element);
